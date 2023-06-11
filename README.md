@@ -1,4 +1,4 @@
-# Weather API
+# Weather API 🌤️
 
 The Weather API is a RESTful API that provides weather information for different cities. It uses the OpenWeatherMap API to fetch real-time weather data based on the provided city name.
 
@@ -40,7 +40,7 @@ Before running the Weather API, make sure you have the following prerequisites i
    docker run -p 8000:8000 -d weather-api
    ```
    
-## Usage
+## Usage  🚀
 
 Once the API is up and running, you can make HTTP GET requests to retrieve weather information for a specific city.
 
@@ -64,15 +64,15 @@ Response:
 }
   ```
   
-## Contributing
+## Contributing 🤝
 Contributions are welcome! If you find any issues or want to add new features to the Weather API, feel free to open an issue or submit a pull request.
 
 Please make sure to follow the existing code style and write appropriate tests for your changes.
 
-## License
+## License 📝
   This project is licensed under the MIT License.
   
-## Acknowledgements
+## Acknowledgements 🙏
    The Weather API is built using the following libraries:
  -  Gorilla Mux: https://github.com/gorilla/mux
  -  Resty: https://github.com/go-resty/resty
