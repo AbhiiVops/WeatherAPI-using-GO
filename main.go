@@ -17,17 +17,17 @@ type Weather struct {
 }
 
 func GetWeather(w http.ResponseWriter, r *http.Request) {
-	// Read API key from environment variable
+	// Reading API key from environment variable
 	apiKey := os.Getenv("API_KEY")
 	if apiKey == "" {
 		log.Fatal("API_KEY environment variable not set")
 	}
 
-	// Read city parameter from the request URL
+	// Reading city parameter from the request URL
 	params := mux.Vars(r)
 	city := params["city"]
 
-	// Make a request to the weather API
+	// Making a request to the weather API
 	client := resty.New()
 	resp, err := client.R().
 		SetQueryParam("q", city).
@@ -37,7 +37,7 @@ func GetWeather(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	// Parse the response JSON
+	// Parsing the response JSON data
 	var data struct {
 		Main struct {
 			Temp float64 `json:"temp"`
@@ -51,30 +51,30 @@ func GetWeather(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	// Create a Weather struct from the parsed data
+	// Creating a Weather struct from the parsed data
 	weather := Weather{
 		Temperature: data.Main.Temp,
 		Description: data.Weather[0].Description,
 	}
 
-	// Send the weather data as JSON response
+	// Sending the weather data as JSON response
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(weather)
 }
 
 func main() {
-	// Load environment variables from .env file
+	// Loading environment variables from .env file
 	err := godotenv.Load("weather_api.env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
 
-	// Create a new router
+	// Creating a new router instance
 	router := mux.NewRouter()
 
-	// Define the API routes
+	// Defining the API routes and their handlers
 	router.HandleFunc("/weather/{city}", GetWeather).Methods("GET")
 
-	// Start the server
+	// Starting the server on port 8000
 	log.Fatal(http.ListenAndServe(":8000", router))
 }

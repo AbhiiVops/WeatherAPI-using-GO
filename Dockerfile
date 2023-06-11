@@ -1,24 +1,24 @@
-# Use the official Golang image as the base image
+# Using  the official Golang image as the base image for the container
 FROM golang:1.20-alpine
 
-# Set the current working directory inside the container
+# Setting the current working directory inside the container to /app
 WORKDIR /app
 
-# Copy the Go module files
+# Copying the Go module files to the current working directory
 COPY go.mod go.sum ./
 
-# Download the Go dependencies
+# Downloading the Go dependencies for the project
 RUN go mod download
 
-# Copy the remaining source code
+# Copying the remaining source code to the current working directory
 COPY . .
 
-# Build the Go application
+# Building the Go application inside the container
 RUN go build -o main .
 
-# Expose port 8000
+# Exposing port 8000 to the host machine
 EXPOSE 8000
 
-# Set the entry point of the container
+# Setting the entry point of the container to the executable we just built
 CMD ["./main"]
 
